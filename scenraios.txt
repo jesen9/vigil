@@ -1,0 +1,8 @@
+1. input 2 atau lebih params sekaligus, kyk cveid dan year, abis itu mereka ga sesuai
+- munculin tidak ditemukan aja.
+- bikin url builder, jadi keknya mending jangan if param ini, jalanin ini dst.
+
+1b. input year dan keyword
+
+2. response API kosong (404)
+3. response API dengan key vulnerabilities kosong (200), atau CVE nya beneran g ad/ga nemu
