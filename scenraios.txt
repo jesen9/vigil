@@ -6,3 +6,6 @@
 
 2. response API kosong (404)
 3. response API dengan key vulnerabilities kosong (200), atau CVE nya beneran g ad/ga nemu
+4. JSON result lebih dari 1 CVE dari API (gaboleh hardcode [0])
+5. CVE punya lebih dari 1 CWE id (ad gak sih?)
+6. CVSS Metric ad banyak macem (cvssMetricV31, cvssMetricV30, cvssMetricV2), ad yg pny 3 3 nya sekaligus (contoh: CVE-2023-3840)
