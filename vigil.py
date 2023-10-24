@@ -4,6 +4,7 @@ import sys
 from urllib import response
 import requests
 import json
+from texttable import Texttable
 
 parser = argparse.ArgumentParser(
     description='Vigil merupakan script yang menggunakan OSINT untuk mencari laporan-laporan kelemahan dalam '
@@ -33,7 +34,7 @@ all_args = vars(parser.parse_args())
 
 base_api_url = "https://services.nvd.nist.gov/rest/json/cves/2.0"
 
-# Ambil args yang sudah diinput saja
+# Ambil args yang sudah diinput saja dan membangun url berisi query ke API
 input_args = {}
 first_arg_passed = False
 for key in all_args:
@@ -43,7 +44,7 @@ for key in all_args:
         # print(base_api_url)
         first_arg_passed = 1
 
-print(base_api_url)
+# print(base_api_url)
 
 # Menembak API sekaligus mengecek apakah terhubung jaringan/internet
 try:
@@ -52,6 +53,8 @@ except:
     print("Tidak terhubung jaringan.")
     sys.exit(1)
 
+# Menilai response API
+data = []
 if (response.status_code == 404):
     print('(404) CVE tidak ditemukan.')
     sys.exit(1)
@@ -60,15 +63,30 @@ else:
     if json_response['vulnerabilities'] == []:
         print('Tidak ada hasil.')
     else:
-        cve_details = json_response['vulnerabilities'][0]['cve']
-        print(json.dumps(cve_details, indent=1, sort_keys=True))
+        i = 0
+        t = Texttable()
+        t.add_row(['', 'CVE ID', 'Description'])
+        # t.add_row(['1', 'CVE-2023-3840', 'A vulnerability in the HPE Aruba Networking Virtual Intranet\xa0Access (VIA) client could allow malicious users to overwrite\xa0arbitrary files as NT AUTHORITY\\SYSTEM. A successful\xa0exploit could allow these malicious users to create a\xa0Denial-of-Service (DoS) condition affecting the Microsoft\xa0Windows operating System boot process.'])
+        cve_details = json_response['vulnerabilities']
+        for cve in cve_details:
+            t.add_row([
+                i,
+                cve['cve']['id'],
+                cve['cve']['descriptions'][0]['value']
+            ])
 
+            i+=1
 
-    # print(type(response.json())) # type is list
+            data.append({
+                'CVE': cve['cve']['id'],
+                'Description': cve['cve']['descriptions'][0]['value']
+            })
+            print(json.dumps(cve['cve']['id'], indent=1, sort_keys=True))
 
-    # response.json() petiknya cmn ', bukan ", jadi harus dilewatin json.dumps()
-
-
+# Bikin table
+# print(tabulate(data, ))
+print(t.draw())
+print(data[0])
 
 sys.exit(0)
 
