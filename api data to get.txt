@@ -1,0 +1,7 @@
+cve id
+cve desc
+cvss
+date
+cwe id
+versi
+platform
