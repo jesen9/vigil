@@ -9,3 +9,23 @@
 4. JSON result lebih dari 1 CVE dari API (gaboleh hardcode [0])
 5. CVE punya lebih dari 1 CWE id (ad gak sih?)
 6. CVSS Metric ad banyak macem (cvssMetricV31, cvssMetricV30, cvssMetricV2), ad yg pny 3 3 nya sekaligus (contoh: CVE-2023-3840)
+7. dari struktur JSON nya, CWE bisa lebih dari 1
+8. [SOLVED] key 'weaknesses' tidak ada / tidak ada CWE (CVE-2023-45376)
+9. search lebih dari satu keyword
+10. CPE lebih dari 1 (CVE-2020-20094) adnroid dan ios
+"cpeMatch": 
+    [
+        {
+            "vulnerable": true,
+            "criteria": "cpe:2.3:a:facebook:instagram:*:*:*:*:*:iphone_os:*:*",
+            "versionEndIncluding": "106.0",
+            "matchCriteriaId": "F3E58F04-E236-4FFF-A929-D102D5EEC6DB"
+        },
+        {
+            "vulnerable": true,
+            "criteria": "cpe:2.3:a:facebook:instagram:*:*:*:*:*:android:*:*",
+            "versionEndIncluding": "107.0.0.11",
+            "matchCriteriaId": "C93F7879-5D0C-4858-A8AF-0846FC8966E4"
+        }
+    ]
+11. kita bisa limit pake 
