@@ -5,3 +5,6 @@ date
 cwe id
 versi
 platform
+
+yang kita cari (platform info, affected app, ada di cve['cve']['configurations'][0]['nodes'][0]['cpeMatch'][0]['criteria'])
+contoh: "criteria": "cpe:2.3:a:facebook:instagram:*:*:*:*:*:android:*:*" (CVE-2020-1895)
