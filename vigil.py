@@ -95,69 +95,9 @@ else:
             })
             # print(json.dumps(cve['cve']['id'], indent=1, sort_keys=True))
         print(t.draw())
-        
 
-# Bikin table
-# print(tabulate(data, ))
-# print(data[0])
+# sys.exit(0)
 
-sys.exit(0)
-
-
-
-# Process args
-if args.CVE_code:
-    cve_api_url = base_api_url + "?cveId=" + args.CVE_code
-    response = requests.get(cve_api_url)
-    
-    if (response.status_code == 404):
-        print('CVE tidak ditemukan.')
-        sys.exit(1)
-    # print(type(response.json())) # type is list
-
-    # response.json() petiknya cmn ', bukan ", jadi harus dilewatin json.dumps()
-    json_response = response.json()
-    cve_details = json_response['vulnerabilities'][0]['cve']
-    
-    # for pretty print. ex: json.dumps(json_response, indent=4, sort_keys=True)
-    json_dumps = json.dumps(json_response)
-    json_dupms_beautify = json.dumps(json_response, indent=1, sort_keys=True)
-    jsonparsed = json.loads(json_dumps)
-    # print(json_response)  # petik satu
-    # print(jsonparsed)  # petik satu
-    # print(json_dumps)  # petik dua
-    # print(json_dupms_beautify)  # petik dua, rapih dgn indentation
-    # print(type(jsonparsed)) # type is list
-    # print(type(json_response))  # type is list
-    # print(type(jsonparsed))  # type is dict
-
-# menggunakan json response seperti halnya dictionary di python
-    
-    # print('\n')
-    # for key in json_response:{
-    #     print(key,"[::]",json_response[key])
-    # }
-# yg ini error -> TypeError: list indices must be integers or slices, not dict
-
-# loaded = json.loads(str(response.json()))
-# print(loaded)
-elif args.keyword:
-    # cve_api_url = "https://services.nvd.nist.gov/rest/json/cves/2.0?keywordSearch=instagram"
-    cve_api_url = base_api_url + "?keywordSearch=" + args.keyword
-    print(cve_api_url)
-
-    response = requests.get(cve_api_url)
-    json_response = response.json()
-
-    # menggunakan json response seperti halnya dictionary di python
-    # print(json.dumps(json_response, indent=1, sort_keys=True))
-    print('\n')
-    for key in json_response: {
-        print(key, ":", json_response[key])
-    }
-
-# print(args.CVE_code)
-# print(args)
 
 # contoh CVE code CVE-2023-41993
 
